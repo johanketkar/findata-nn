@@ -27,8 +27,10 @@ def is_usable_date(t1, df):
     MRQ_t1 = ((df['dimension'] == 'MRQ') & df[t1] == 1).any()
 
     return (MRQ_t0 and MRT_t0 and MRQ_t1), t0
-      
+
+count=1  
 for ticker in os.listdir(data_path):
+    print(str(count))
     if(ticker == '.DS_Store'):
         continue
     coverage_df = pd.read_csv(data_path+'/'+ticker+'/'+ticker+'_coverage.csv')
@@ -58,5 +60,6 @@ for ticker in os.listdir(data_path):
 
             consolidated_df = consolidated_df.append(new_row)
 
+    count+=1
 consolidated_df.to_csv(constants.PROJECT_PATH+'/all_data.csv')
 
